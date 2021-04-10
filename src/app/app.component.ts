@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService, Login } from './shared/services/account.service';
+import { Login } from './shared/models/login';
+import { AuthenticationService } from './shared/auth/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { AccountService, Login } from './shared/services/account.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AuthenticationService) {
   }
 
   ngOnInit() {
