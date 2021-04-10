@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { JwtHelperService } from "@auth0/angular-jwt";
 import { tap } from 'rxjs/operators';
 import { Login } from "../models/login";
 import { ServiceBase } from "../service.base";
@@ -24,8 +25,11 @@ export class AuthenticationService extends ServiceBase {
         localStorage.removeItem('user');
     }
 
-    isLoggedIn() {
-        return true;
+    isisAuthenticated() {
+        const token = JSON.parse(localStorage.getItem('user'))['token'];
+        const helper = new JwtHelperService();
+        const isExpired = helper.isTokenExpired(token);
+        return isExpired;
     }
 }
 
