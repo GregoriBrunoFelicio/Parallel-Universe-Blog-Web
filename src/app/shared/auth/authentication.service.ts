@@ -25,11 +25,10 @@ export class AuthenticationService extends ServiceBase {
         localStorage.removeItem('user');
     }
 
-    isisAuthenticated() {
+    isAuthenticated() {
         const token = JSON.parse(localStorage.getItem('user'))['token'];
-        const helper = new JwtHelperService();
-        const isExpired = helper.isTokenExpired(token);
-        return isExpired;
+        const jwtHelper = new JwtHelperService();
+        return jwtHelper.isTokenExpired(token);
     }
 }
 
