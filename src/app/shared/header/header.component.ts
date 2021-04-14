@@ -6,14 +6,9 @@ import { AuthenticationService } from '../auth/authentication.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  isLoggedIn: boolean;
+  constructor(public authenticationService: AuthenticationService) { 
 
-  constructor(private authenticationService: AuthenticationService) { }
-
-  ngOnInit() {
-    this.isLoggedIn = this.authenticationService.isAuthenticated();
   }
-
 }
