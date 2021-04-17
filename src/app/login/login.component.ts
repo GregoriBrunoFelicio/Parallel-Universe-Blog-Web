@@ -34,10 +34,10 @@ export class LoginComponent implements OnInit {
     const login = this.loginForm.value as Login;
     this.authenticationService.login(login).subscribe(
       () => {
-        this.router.navigate(['home']);
+        // this.router.navigate(['home']);
       },
-      (error) => {
-        console.log(error.error);
+      (message) => {
+        console.log(message.error);
       }
     );
   }
