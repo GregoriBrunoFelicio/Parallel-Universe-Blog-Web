@@ -1,11 +1,8 @@
-import { HttpClient } from "@angular/common/http";
-import { environment } from "src/environments/environment";
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 export class ServiceBase {
+  protected url = environment.apiUrl;
 
-    protected url = environment.apiUrl;
-
-    constructor(protected http: HttpClient) {
-
-    }
+  constructor(protected http: HttpClient) {}
 }
