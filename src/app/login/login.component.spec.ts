@@ -11,7 +11,7 @@ describe('LoginComponent', () => {
   let fixture: ComponentFixture<LoginComponent>;
 
   const authenticationServiceMock = {
-    login: jest.fn(() => of([])),
+    login: jest.fn(() => of()),
   };
 
   const routerMock = {
@@ -34,7 +34,6 @@ describe('LoginComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -56,23 +55,25 @@ describe('LoginComponent', () => {
   describe('login', () => {
     describe('when form is invalid', () => {
       beforeEach(() => {
+        component.createForm();
         component.login();
       });
 
-      describe('should not call method login', () => {
+      it('should not call method login', () => {
         expect(authenticationServiceMock.login).toBeCalledTimes(0);
       });
     });
 
     describe('when form is valid', () => {
       beforeEach(() => {
+        component.createForm();
         component.loginForm.get('email').setValue('email@email.com');
         component.loginForm.get('password').setValue('password');
         component.login();
       });
 
-      describe('should call method login', () => {
-        expect(authenticationServiceMock.login).toBeCalledTimes(1);
+      it('should call method login', () => {
+        expect(authenticationServiceMock.login).toBeCalled();
       });
     });
   });

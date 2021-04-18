@@ -33,12 +33,13 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) return;
     const login = this.loginForm.value as Login;
     this.authenticationService.login(login).subscribe(
-      () => {
-        // this.router.navigate(['home']);
-      },
-      (message) => {
-        console.log(message.error);
+      (x) => {
+        console.log('entrou');
+        //this.router.navigate(['home']);
       }
+      // (message) => {
+      //   console.log('deu ruim');
+      // }
     );
   }
 }
