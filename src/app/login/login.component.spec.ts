@@ -11,7 +11,7 @@ describe('LoginComponent', () => {
   let fixture: ComponentFixture<LoginComponent>;
 
   const authenticationServiceMock = {
-    login: jest.fn(() => of()),
+    login: jest.fn(() => of([])),
   };
 
   const routerMock = {
@@ -73,7 +73,11 @@ describe('LoginComponent', () => {
       });
 
       it('should call method login', () => {
-        expect(authenticationServiceMock.login).toBeCalled();
+        expect(authenticationServiceMock.login).toBeCalledTimes(1);
+      });
+
+      it('should call method navigate', () => {
+        expect(routerMock.navigate).toHaveBeenCalledWith(['home']);
       });
     });
   });
