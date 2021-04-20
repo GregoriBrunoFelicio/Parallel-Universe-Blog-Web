@@ -24,4 +24,28 @@ describe('PostCreateComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('ngOnInit', () => {
+    let createFormSpy;
+    beforeEach(() => {
+      createFormSpy = jest.spyOn(component, 'createForm');
+      component.ngOnInit();
+    });
+
+    it('should call method create form', () => {
+      expect(createFormSpy).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('create', () => {
+    let resetFormSpy;
+    beforeEach(() => {
+      resetFormSpy = jest.spyOn(component.form, 'reset');
+      component.create();
+    });
+
+    it('should call reset method', () => {
+      expect(resetFormSpy).toHaveBeenCalledTimes(1);
+    });
+  });
 });
