@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastService } from 'src/app/shared/toast.service';
 import { Post } from '../post';
 
 @Component({
@@ -10,7 +11,10 @@ import { Post } from '../post';
 export class PostCreateComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private toastrService: ToastService
+  ) {}
 
   ngOnInit() {
     this.createForm();
@@ -26,6 +30,7 @@ export class PostCreateComponent implements OnInit {
 
   create() {
     const post = this.form.value as Post;
+    this.toastrService.showSuccessMessage('Post created');
     this.form.reset();
   }
 }
