@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Post } from '../post';
 
 @Component({
   selector: 'app-post-create',
@@ -24,6 +25,7 @@ export class PostCreateComponent implements OnInit {
   }
 
   create() {
-    console.log(this.form.value);
+    const post = this.form.value as Post;
+    this.form.reset();
   }
 }

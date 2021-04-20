@@ -12,6 +12,6 @@
             <label for="exampleFormControlInput1">Text</label>
             <textarea type="text" class="form-control" rows="12" formControlName="text"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg m-3">Create</button>
+        <button type="submit" class="btn btn-primary btn-lg m-3" [disabled]="form.invalid">Create</button>
     </form>
 </div>
