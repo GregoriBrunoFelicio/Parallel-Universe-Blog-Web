@@ -11,7 +11,9 @@ export class PostCreateComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.createForm();
+  }
 
   createForm() {
     this.form = this.formBuilder.group({
@@ -19,5 +21,9 @@ export class PostCreateComponent implements OnInit {
       description: ['', Validators.required],
       text: ['', Validators.required],
     });
+  }
+
+  create() {
+    console.log(this.form.value);
   }
 }
