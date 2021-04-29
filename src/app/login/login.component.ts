@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../shared/auth/authentication.service';
 import { Login } from '../shared/models/login';
+import { ToastService } from '../shared/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['home']);
       },
       (message) => {
-        console.log(message.error);
+        this.toastService.showErrorMessage(message.error);
       }
     );
   }
