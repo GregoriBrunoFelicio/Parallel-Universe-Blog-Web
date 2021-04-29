@@ -1,12 +1,11 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { AuthGuard } from "../shared/auth/auth-guard";
-import { PostComponent } from "./post.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { PostComponent } from './post.component';
 
-const routes: Routes = [{ path: '', component: PostComponent, canActivate: [AuthGuard] }];
+const routes: Routes = [{ path: '', component: PostComponent }];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class PostRoutingModule { }
+export class PostRoutingModule {}
