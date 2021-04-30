@@ -8,4 +8,8 @@ import { AuthenticationService } from '../auth/authentication.service';
 })
 export class HeaderComponent {
   constructor(public authenticationService: AuthenticationService) {}
+
+  logout() {
+    this.authenticationService.logout();
+  }
 }

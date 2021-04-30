@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map } from 'rxjs/operators';
 import { Login } from '../models/login';
@@ -9,7 +10,7 @@ import { ServiceBase } from '../service.base';
   providedIn: 'root',
 })
 export class AuthenticationService extends ServiceBase {
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient, private route: Router) {
     super(http);
   }
 
@@ -23,6 +24,7 @@ export class AuthenticationService extends ServiceBase {
 
   logout() {
     localStorage.removeItem('user');
+    this.route.navigate(['']);
   }
 
   isAuthenticated() {
