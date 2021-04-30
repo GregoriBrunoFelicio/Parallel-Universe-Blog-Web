@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { AuthenticationService } from '../shared/auth/authentication.service';
+import { ToastService } from '../shared/toast.service';
 import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
@@ -18,6 +19,10 @@ describe('LoginComponent', () => {
     navigate: jest.fn(),
   };
 
+  const toastServiceMock = {
+    showErrorMessage: jest.fn(),
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
@@ -25,6 +30,7 @@ describe('LoginComponent', () => {
         FormBuilder,
         { provide: AuthenticationService, useValue: authenticationServiceMock },
         { provide: Router, useValue: routerMock },
+        { provide: ToastService, useValue: toastServiceMock },
       ],
       imports: [ReactiveFormsModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
