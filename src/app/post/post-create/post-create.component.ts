@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastService } from 'src/app/shared/toast.service';
 import { Post } from '../post';
+import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-post-create',
@@ -13,7 +14,8 @@ export class PostCreateComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private toastrService: ToastService
+    private toastrService: ToastService,
+    private postService: PostService
   ) {}
 
   ngOnInit() {
@@ -29,8 +31,17 @@ export class PostCreateComponent implements OnInit {
   }
 
   create() {
+    if (this.form.invalid) return;
     const post = this.form.value as Post;
-    this.toastrService.showSuccessMessage('Post created');
-    this.form.reset();
+    this.postService.create(post).subscribe(
+      () => {
+        this.toastrService.showSuccessMessage('Post created');
+        this.form.reset();
+      },
+      (message) => {
+        console.log(message);
+        this.toastrService.showErrorMessage(message.error);
+      }
+    );
   }
 }

@@ -35,7 +35,7 @@ export class AuthenticationService extends ServiceBase {
     }
   }
 
-  private getToken() {
+  getToken() {
     const token = localStorage.getItem('user');
     return token ? JSON.parse(token)['token'] : '';
   }
