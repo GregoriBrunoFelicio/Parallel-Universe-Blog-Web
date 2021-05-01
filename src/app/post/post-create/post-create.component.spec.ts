@@ -1,6 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { of } from 'rxjs';
+import { AuthenticationService } from 'src/app/shared/auth/authentication.service';
+import { User } from 'src/app/shared/models/user';
 import { ToastService } from 'src/app/shared/toast.service';
 import { PostService } from '../post.service';
 import { PostCreateComponent } from './post-create.component';
@@ -14,7 +17,11 @@ describe('PostCreateComponent', () => {
   };
 
   const postServiceMock = {
-    create: jest.fn(),
+    create: jest.fn(() => of([])),
+  };
+
+  const authenticationServiceMock = {
+    getUser: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -25,6 +32,7 @@ describe('PostCreateComponent', () => {
       providers: [
         { provide: ToastService, useValue: toastServiceMock },
         { provide: PostService, useValue: postServiceMock },
+        { provide: AuthenticationService, useValue: authenticationServiceMock },
       ],
     }).compileComponents();
   });
@@ -55,6 +63,10 @@ describe('PostCreateComponent', () => {
     let resetFormSpy;
     beforeEach(() => {
       resetFormSpy = jest.spyOn(component.form, 'reset');
+      component.form.get('title').setValue('title');
+      component.form.get('description').setValue('description');
+      component.form.get('text').setValue('text');
+      component.user = { id: 1 } as User;
       component.create();
     });
 

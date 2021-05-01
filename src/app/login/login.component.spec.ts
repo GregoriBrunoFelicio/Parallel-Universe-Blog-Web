@@ -83,7 +83,7 @@ describe('LoginComponent', () => {
       });
 
       it('should call method navigate', () => {
-        expect(routerMock.navigate).toHaveBeenCalledWith(['home']);
+        expect(routerMock.navigate).toHaveBeenCalledWith(['admin']);
       });
     });
   });
