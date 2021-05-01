@@ -1,6 +1,7 @@
 import {
   HttpEvent,
   HttpHandler,
+  HttpHeaders,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
@@ -23,7 +24,10 @@ export class TokenInterceptor implements HttpInterceptor {
         setHeaders: {
           Authorization: `Bearer ${this.authentication.getToken()}`,
         },
-        responseType: 'text',
+        responseType: 'json',
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
       });
     }
     return next.handle(request);

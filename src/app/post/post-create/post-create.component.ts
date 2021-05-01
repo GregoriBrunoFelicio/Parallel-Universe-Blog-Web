@@ -45,7 +45,7 @@ export class PostCreateComponent implements OnInit {
 
     this.postService.create(post).subscribe(
       (result: any) => {
-        this.toastrService.showSuccessMessage(result);
+        this.toastrService.showSuccessMessage(result.message);
         this.form.reset();
       },
       (message) => {
