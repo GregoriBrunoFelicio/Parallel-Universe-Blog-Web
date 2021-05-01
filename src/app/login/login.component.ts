@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     const login = this.loginForm.value as Login;
     this.authenticationService.login(login).subscribe(
       () => {
-        this.router.navigate(['home']);
+        this.router.navigate(['admin']);
       },
       (message) => {
         this.toastService.showErrorMessage(message.error);

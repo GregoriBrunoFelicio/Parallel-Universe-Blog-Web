@@ -24,7 +24,7 @@ export class AuthenticationService extends ServiceBase {
 
   logout() {
     localStorage.removeItem('user');
-    this.route.navigate(['']);
+    this.route.navigate(['login']);
   }
 
   isAuthenticated() {
