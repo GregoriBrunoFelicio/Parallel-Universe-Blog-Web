@@ -12,6 +12,6 @@ export class PostService extends ServiceBase {
   }
 
   create(post: Post) {
-    return this.http.post<Post>(`${this.url}/Post`, post);
+    return this.http.post(`${this.url}/Post`, post);
   }
 }

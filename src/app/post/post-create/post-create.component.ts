@@ -32,14 +32,19 @@ export class PostCreateComponent implements OnInit {
 
   create() {
     if (this.form.invalid) return;
+
     const post = this.form.value as Post;
+    post.date = new Date();
+    post.active = true;
+    post.userId = 562;
+
     this.postService.create(post).subscribe(
-      () => {
-        this.toastrService.showSuccessMessage('Post created');
+      (result: any) => {
+        this.toastrService.showSuccessMessage(result);
         this.form.reset();
+        console.log(result);
       },
       (message) => {
-        console.log(message);
         this.toastrService.showErrorMessage(message.error);
       }
     );
