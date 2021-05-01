@@ -1,5 +1,9 @@
-<ul>
-    <li *ngFor="let post of posts$ | async">
-        {{post.title}}
-    </li>
-</ul>
+<div class="list-group" *ngFor="let post of posts$ | async">
+    <a class="list-group-item list-group-item-action flex-column align-items-start m-2 col-6">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{post.title}}</h5>
+            <small>{{post.date | date: 'MMM d, y, h:mm:ss a'}}</small>
+        </div>
+        <p class="mb-1">{{post.description}}</p>
+    </a>
+</div>
