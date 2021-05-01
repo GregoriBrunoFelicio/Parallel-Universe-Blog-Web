@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ServiceBase } from '../shared/service.base';
 import { Post } from './post';
 
@@ -13,5 +14,9 @@ export class PostService extends ServiceBase {
 
   create(post: Post) {
     return this.http.post(`${this.url}/Post`, post);
+  }
+
+  getAllActive(): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.url}/Post/AllActive`);
   }
 }
