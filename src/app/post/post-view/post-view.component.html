@@ -1,4 +1,10 @@
-<h1>
-    {{post.title}}</h1>
-<h5>{{post.description}}</h5>
-<p>{{post.text}}</p>
+<div class="col-12 mb-5 mt-3">
+    <h1>
+        {{post.title}}</h1>
+    <span>
+   Gregori - {{post.date | date: 'MMM d, y, h:mm:ss a'}}
+        </span>
+</div>
+<div class="col-12">
+    <p>{{post.text}}</p>
+</div>
