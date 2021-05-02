@@ -1,12 +1,12 @@
 <div class="col-12">
     <form class="mt-5" [formGroup]="form" (ngSubmit)="create()">
-        <div class="form-group col-3">
+        <div class="form-group col-5">
             <label for="exampleFormControlInput1">Title</label>
             <input type="text" class="form-control" formControlName="title">
         </div>
         <div class="form-group col-5">
             <label for="exampleFormControlInput1">Description</label>
-            <textarea type="text" class="form-control" formControlName="description"></textarea>
+            <textarea type="text" class="form-control disable-risize" formControlName="description"></textarea>
         </div>
         <div class="form-group col-12">
             <label for="exampleFormControlInput1">Text</label>
