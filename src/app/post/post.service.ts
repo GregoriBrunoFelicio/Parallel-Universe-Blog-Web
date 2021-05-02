@@ -19,4 +19,8 @@ export class PostService extends ServiceBase {
   getAllActive(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.url}/Post/AllActive`);
   }
+
+  getById(id: number) {
+    return this.http.get<Post>(`${this.url}/Post/${id}`);
+  }
 }
