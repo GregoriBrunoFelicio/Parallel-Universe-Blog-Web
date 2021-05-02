@@ -12,6 +12,10 @@
             <label for="exampleFormControlInput1">Text</label>
             <textarea type="text" class="form-control" rows="12" formControlName="text"></textarea>
         </div>
+        <div class="form-check ml-3">
+            <input type="checkbox" class="form-check-input" formControlName="active">
+            <label class="form-check-label">Active</label>
+        </div>
         <button type="submit" class="btn btn-primary btn-lg m-3" [disabled]="form.invalid">Create</button>
     </form>
 </div>

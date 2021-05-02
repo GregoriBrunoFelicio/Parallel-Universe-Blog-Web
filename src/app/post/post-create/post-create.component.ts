@@ -32,6 +32,7 @@ export class PostCreateComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       text: ['', Validators.required],
+      active: [true],
     });
   }
 
@@ -40,7 +41,6 @@ export class PostCreateComponent implements OnInit {
 
     const post = this.form.value as Post;
     post.date = new Date();
-    post.active = true;
     post.userId = this.user.id;
 
     this.postService.create(post).subscribe(
