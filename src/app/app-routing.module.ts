@@ -33,6 +33,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'post-view/:id',
+    loadChildren: () =>
+      import('./post/post-view/post-view.module').then((m) => m.PostViewModule),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
