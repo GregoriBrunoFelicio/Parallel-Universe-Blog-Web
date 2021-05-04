@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { PostViewComponent } from './post-view.component';
 
 describe('PostViewComponent', () => {
@@ -8,9 +9,9 @@ describe('PostViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PostViewComponent ]
-    })
-    .compileComponents();
+      declarations: [PostViewComponent],
+      providers: [ActivatedRoute, RouterTestingModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {
