@@ -16,7 +16,7 @@ export class PostViewComponent implements OnInit {
   }
 
   getPost() {
-    this.activatedRoute.snapshot.data.subscribe((data) => {
+    this.activatedRoute.data.subscribe((data) => {
       this.post = data.post;
     });
   }

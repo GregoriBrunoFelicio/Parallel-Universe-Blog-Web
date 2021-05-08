@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/auth/authentication.service';
 import { User } from 'src/app/shared/models/user';
 import { ToastService } from 'src/app/shared/toast.service';
@@ -19,12 +20,17 @@ export class PostCreateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastrService: ToastService,
     private postService: PostService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.createForm();
     this.user = this.authenticationService.getUser();
+  }
+
+  getIdFromRoute() {
+    return Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }
 
   createForm() {
@@ -35,6 +41,8 @@ export class PostCreateComponent implements OnInit {
       active: [true],
     });
   }
+
+  updateFormValues() {}
 
   create() {
     if (this.form.invalid) return;

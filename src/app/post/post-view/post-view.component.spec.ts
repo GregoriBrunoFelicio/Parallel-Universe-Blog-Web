@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { PostViewComponent } from './post-view.component';
 
 describe('PostViewComponent', () => {
@@ -7,15 +8,14 @@ describe('PostViewComponent', () => {
   let fixture: ComponentFixture<PostViewComponent>;
 
   const activatedRouteMock = {
-    data: jest.fn(),
+    snapshot: { data: {} },
   };
-  const fakeActivatedRoute = {
-    snapshot: { data: { post: {} } },
-  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PostViewComponent],
-      providers: [{ provide: ActivatedRoute, useClass: fakeActivatedRoute }],
+      imports: [RouterTestingModule],
+      providers: [{ provide: ActivatedRoute, useValue: activatedRouteMock }],
     }).compileComponents();
   });
 

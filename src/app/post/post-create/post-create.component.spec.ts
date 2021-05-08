@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { AuthenticationService } from 'src/app/shared/auth/authentication.service';
 import { User } from 'src/app/shared/models/user';
@@ -25,6 +26,10 @@ describe('PostCreateComponent', () => {
     getUser: jest.fn(),
   };
 
+  const activatedRouteMock = {
+    snapshot: { data: {} },
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PostCreateComponent],
@@ -34,6 +39,7 @@ describe('PostCreateComponent', () => {
         { provide: ToastService, useValue: toastServiceMock },
         { provide: PostService, useValue: postServiceMock },
         { provide: AuthenticationService, useValue: authenticationServiceMock },
+        { provide: ActivatedRoute, useValue: activatedRouteMock },
       ],
     }).compileComponents();
   });
