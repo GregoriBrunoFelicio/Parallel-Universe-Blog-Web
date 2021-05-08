@@ -7,18 +7,15 @@ describe('PostViewComponent', () => {
   let fixture: ComponentFixture<PostViewComponent>;
 
   const activatedRouteMock = {
-    snapshot: { data: {} },
+    data: jest.fn(),
   };
-
+  const fakeActivatedRoute = {
+    snapshot: { data: { post: {} } },
+  };
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PostViewComponent],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useClass: activatedRouteMock,
-        },
-      ],
+      providers: [{ provide: ActivatedRoute, useClass: fakeActivatedRoute }],
     }).compileComponents();
   });
 

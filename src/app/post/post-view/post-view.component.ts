@@ -8,7 +8,7 @@ import { Post } from '../post';
   styleUrls: ['./post-view.component.css'],
 })
 export class PostViewComponent implements OnInit {
-  post: Post = {} as Post;
+  post: Post;
   constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
@@ -16,7 +16,7 @@ export class PostViewComponent implements OnInit {
   }
 
   getPost() {
-    this.activatedRoute.data.subscribe((data) => {
+    this.activatedRoute.snapshot.data.subscribe((data) => {
       this.post = data.post;
     });
   }
