@@ -15,7 +15,7 @@ import { PostService } from '../post.service';
 export class PostCreateComponent implements OnInit {
   form: FormGroup;
   user: User;
-  isNew = true;
+  id: number;
   constructor(
     private formBuilder: FormBuilder,
     private toastrService: ToastService,
@@ -38,33 +38,33 @@ export class PostCreateComponent implements OnInit {
       active: [true],
     });
 
-    this.updateFormValues();
+    if (this.id) {
+      this.setFormValues();
+    }
   }
 
-  updateFormValues() {
-    const id = this.getIdFromRoute();
-    if (!id) return;
-    this.isNew = false;
-    this.postService.getById(id).subscribe((post) => {
+  setFormValues() {
+    this.postService.getById(this.id).subscribe((post) => {
       this.form.patchValue(post);
     });
   }
 
   getIdFromRoute() {
-    return Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }
 
   createPostModel() {
     const post = this.form.value as Post;
-    post.date = new Date();
+    post.date = post.date ? post.date : new Date();
     post.userId = this.user.id;
+    post.id = this.id ? this.id : null;
     return post;
   }
 
   handle() {
     if (this.form.invalid) return;
     const post = this.createPostModel();
-    if (this.isNew) {
+    if (!post.id) {
       this.create(post);
     } else {
       this.update(post);
@@ -90,7 +90,6 @@ export class PostCreateComponent implements OnInit {
         this.form.reset();
       },
       (message) => {
-        post.id = this.getIdFromRoute();
         this.toastrService.showErrorMessage(message.error);
       }
     );

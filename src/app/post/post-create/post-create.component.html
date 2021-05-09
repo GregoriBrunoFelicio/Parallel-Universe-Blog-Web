@@ -17,7 +17,7 @@
             <label class="form-check-label">Active</label>
         </div>
         <button type="submit" class="btn btn-primary btn-lg m-3" [disabled]="form.invalid">
-      {{ isNew ? "Create" : 'Update' }}
+      {{ !id ? "Create" : 'Update' }}
     </button>
     </form>
 </div>
