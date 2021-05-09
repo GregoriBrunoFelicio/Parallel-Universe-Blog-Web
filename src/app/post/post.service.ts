@@ -16,6 +16,10 @@ export class PostService extends ServiceBase {
     return this.http.post(`${this.url}/Post`, post);
   }
 
+  update(post: Post) {
+    return this.http.put(`${this.url}/Post`, post);
+  }
+
   getAllActive(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.url}/Post/AllActive`);
   }
