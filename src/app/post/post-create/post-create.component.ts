@@ -15,6 +15,7 @@ import { PostService } from '../post.service';
 export class PostCreateComponent implements OnInit {
   form: FormGroup;
   user: User;
+  id: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,12 +26,9 @@ export class PostCreateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.getIdFromRoute();
     this.createForm();
     this.user = this.authenticationService.getUser();
-  }
-
-  getIdFromRoute() {
-    return Number(this.activatedRoute.snapshot.paramMap.get('id'));
   }
 
   createForm() {
@@ -40,9 +38,20 @@ export class PostCreateComponent implements OnInit {
       text: ['', Validators.required],
       active: [true],
     });
+
+    this.updateFormValues();
   }
 
-  updateFormValues() {}
+  getIdFromRoute() {
+    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+  }
+
+  updateFormValues() {
+    if (!this.id) return;
+    this.postService.getById(this.id).subscribe((post) => {
+      this.form.patchValue(post);
+    });
+  }
 
   create() {
     if (this.form.invalid) return;
