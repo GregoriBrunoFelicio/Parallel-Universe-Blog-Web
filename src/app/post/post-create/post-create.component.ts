@@ -26,7 +26,11 @@ export class PostCreateComponent implements OnInit {
 
   ngOnInit() {
     this.getIdFromRoute();
+    this.getUser();
     this.createForm();
+  }
+
+  getUser() {
     this.user = this.authenticationService.getUser();
   }
 
