@@ -74,7 +74,7 @@ describe('PostCreateComponent', () => {
     });
   });
 
-  describe('create', () => {
+  describe('handle', () => {
     describe('when form is valid', () => {
       let resetFormSpy;
       beforeEach(() => {
@@ -84,7 +84,7 @@ describe('PostCreateComponent', () => {
         component.form.get('description').setValue('description');
         component.form.get('text').setValue('text');
         component.user = { id: 1 } as User;
-        component.create();
+        component.handle();
       });
 
       it('should call method create', () => {
@@ -103,7 +103,7 @@ describe('PostCreateComponent', () => {
     describe('when form is not valid', () => {
       beforeEach(() => {
         jest.clearAllMocks();
-        component.create();
+        component.handle();
       });
 
       it('should not call method create', () => {
@@ -121,7 +121,7 @@ describe('PostCreateComponent', () => {
         postServiceMock.create.mockImplementation(() =>
           throwError(new Error())
         );
-        component.create();
+        component.handle();
       });
 
       it('should call method showErrorMessage', () => {
