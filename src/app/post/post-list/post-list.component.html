@@ -5,5 +5,6 @@
             <small>{{post.date | date: 'MMM d, y, h:mm:ss a'}}</small>
         </div>
         <p class="mb-1">{{post.description}}</p>
+        <a *ngIf="autenticationService.isAuthenticated()" [routerLink]="['/post-create', post.id]">Edit</a>
     </a>
 </div>

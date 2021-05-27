@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthenticationService } from 'src/app/shared/auth/authentication.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
 
@@ -11,7 +12,10 @@ import { PostService } from '../post.service';
 export class PostListComponent implements OnInit {
   posts$: Observable<Post[]>;
 
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+    public autenticationService: AuthenticationService
+  ) {}
 
   ngOnInit() {
     this.posts$ = this.postService.getAllActive();
