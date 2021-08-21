@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from 'src/app/shared/auth/authentication.service';
+import { User } from 'src/app/shared/models/user';
 import { Post } from '../post';
 import { PostService } from '../post.service';
 
@@ -11,6 +12,7 @@ import { PostService } from '../post.service';
 })
 export class PostListComponent implements OnInit {
   posts$: Observable<Post[]>;
+  user: User;
 
   constructor(
     private postService: PostService,
@@ -19,5 +21,10 @@ export class PostListComponent implements OnInit {
 
   ngOnInit() {
     this.posts$ = this.postService.getAllActive();
+    this.user = this.autenticationService.getUser();
+  }
+
+  canEdit(postId: number) {
+    return this.user.id === postId;
   }
 }
