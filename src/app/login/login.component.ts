@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../shared/auth/authentication.service';
 import { Login } from '../shared/models/login';
+import { Result } from '../shared/result';
 import { ToastService } from '../shared/toast.service';
 
 @Component({
@@ -38,8 +39,9 @@ export class LoginComponent implements OnInit {
       () => {
         this.router.navigate(['admin']);
       },
-      (message) => {
-        this.toastService.showErrorMessage(message.error);
+      (error) => {
+        const result = error.error as Result;
+        this.toastService.showErrorMessage(result.message);
       }
     );
   }
