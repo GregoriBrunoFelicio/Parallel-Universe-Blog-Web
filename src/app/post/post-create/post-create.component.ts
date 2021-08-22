@@ -17,6 +17,7 @@ export class PostCreateComponent implements OnInit {
   form: FormGroup;
   user: User;
   id: number;
+
   constructor(
     private formBuilder: FormBuilder,
     private toastrService: ToastService,
@@ -26,9 +27,9 @@ export class PostCreateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.createForm();
     this.getIdFromRoute();
     this.getUser();
-    this.createForm();
   }
 
   getUser() {
@@ -84,7 +85,7 @@ export class PostCreateComponent implements OnInit {
       },
       (error) => {
         const result = error.error as Result;
-        this.toastrService.showErrorMessage(result.message);
+        this.toastrService.showErrorMessage('error');
       }
     );
   }

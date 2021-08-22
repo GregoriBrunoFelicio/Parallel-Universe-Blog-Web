@@ -1,7 +1,9 @@
+import { CommonModule } from '@angular/common';
+import { HttpResponse } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { AuthenticationService } from 'src/app/shared/auth/authentication.service';
 import { User } from 'src/app/shared/models/user';
@@ -20,6 +22,7 @@ describe('PostCreateComponent', () => {
 
   const postServiceMock = {
     create: jest.fn(() => of({})),
+    getById: jest.fn(() => of([])),
   };
 
   const authenticationServiceMock = {
@@ -27,15 +30,16 @@ describe('PostCreateComponent', () => {
   };
 
   const activatedRouteMock = {
-    snapshot: { data: {} },
+    snapshot: { paramMap: convertToParamMap({ id: 1 }) },
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PostCreateComponent],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, CommonModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
+        FormBuilder,
         { provide: ToastService, useValue: toastServiceMock },
         { provide: PostService, useValue: postServiceMock },
         { provide: AuthenticationService, useValue: authenticationServiceMock },
@@ -47,7 +51,6 @@ describe('PostCreateComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PostCreateComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -64,11 +67,9 @@ describe('PostCreateComponent', () => {
       } as User);
       component.ngOnInit();
     });
-
     it('should call method create form', () => {
       expect(createFormSpy).toHaveBeenCalledTimes(1);
     });
-
     it('the user should be defined', () => {
       expect(component.user).toBeDefined();
     });
@@ -79,11 +80,13 @@ describe('PostCreateComponent', () => {
       let resetFormSpy;
       beforeEach(() => {
         jest.clearAllMocks();
-        resetFormSpy = jest.spyOn(component.form, 'reset');
+        component.createForm();
         component.form.get('title').setValue('title');
         component.form.get('description').setValue('description');
         component.form.get('text').setValue('text');
         component.user = { id: 1 } as User;
+        component.user = { id: 1 } as User;
+        resetFormSpy = jest.spyOn(component.form, 'reset');
         component.handle();
       });
 
@@ -103,6 +106,7 @@ describe('PostCreateComponent', () => {
     describe('when form is not valid', () => {
       beforeEach(() => {
         jest.clearAllMocks();
+        component.createForm();
         component.handle();
       });
 
@@ -114,12 +118,23 @@ describe('PostCreateComponent', () => {
     describe('when there is an exception', () => {
       beforeEach(() => {
         jest.clearAllMocks();
+        component.createForm();
         component.form.get('title').setValue('title');
         component.form.get('description').setValue('description');
         component.form.get('text').setValue('text');
         component.user = { id: 1 } as User;
-        postServiceMock.create.mockImplementation(() =>
-          throwError(new Error())
+        postServiceMock.create.mockReturnValue(
+          throwError(
+            new HttpResponse({
+              body: {
+                error: {
+                  error: {
+                    message: '',
+                  },
+                },
+              },
+            })
+          )
         );
         component.handle();
       });
