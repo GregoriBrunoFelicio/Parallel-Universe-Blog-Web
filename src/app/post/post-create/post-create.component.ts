@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/auth/authentication.service';
 import { User } from 'src/app/shared/models/user';
+import { Result } from 'src/app/shared/result';
 import { ToastService } from 'src/app/shared/toast.service';
 import { Post } from '../post';
 import { PostService } from '../post.service';
@@ -81,8 +82,9 @@ export class PostCreateComponent implements OnInit {
         this.toastrService.showSuccessMessage(result.message);
         this.form.reset();
       },
-      (message) => {
-        this.toastrService.showErrorMessage(message.error);
+      (error) => {
+        const result = error.error as Result;
+        this.toastrService.showErrorMessage(result.message);
       }
     );
   }
@@ -93,8 +95,9 @@ export class PostCreateComponent implements OnInit {
         this.toastrService.showSuccessMessage(result.message);
         this.form.reset();
       },
-      (message) => {
-        this.toastrService.showErrorMessage(message.error);
+      (error) => {
+        const result = error.error as Result;
+        this.toastrService.showErrorMessage(result.message);
       }
     );
   }
