@@ -59,7 +59,7 @@ export class PostCreateComponent implements OnInit {
 
   createPostModel() {
     const post = this.form.value as Post;
-    post.date = !post.date ? post.date : new Date();
+    post.date = post.date ? post.date : new Date();
     post.userId = this.user.id;
     post.id = this.id ? this.id : null;
     return post;
