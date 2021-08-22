@@ -25,6 +25,7 @@ export class PostListComponent implements OnInit {
   }
 
   canEdit(postId: number) {
+    console.log(this.user.id);
     return this.user.id === postId;
   }
 }
