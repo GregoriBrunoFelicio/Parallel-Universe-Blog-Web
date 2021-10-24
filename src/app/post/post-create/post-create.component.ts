@@ -28,7 +28,6 @@ export class PostCreateComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    this.getIdFromRoute();
     this.getUser();
   }
 
@@ -44,6 +43,8 @@ export class PostCreateComponent implements OnInit {
       active: [true],
     });
 
+    this.getIdFromRoute();
+
     if (this.id) {
       this.setFormValues();
     }
@@ -51,6 +52,7 @@ export class PostCreateComponent implements OnInit {
 
   setFormValues() {
     this.postService.getById(this.id).subscribe((post) => {
+      console.log(post);
       this.form.patchValue(post);
     });
   }
