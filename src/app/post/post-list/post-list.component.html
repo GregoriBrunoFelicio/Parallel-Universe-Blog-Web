@@ -2,7 +2,7 @@
     <a [routerLink]="['/post-view', post.id]" class="list-group-item list-group-item-action ">
         <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{post.title}}</h5>
-            <small>{{post.date | date: 'MMM d, y, h:mm:ss a'}}</small>
+            <small>{{post.date | date: 'dd/MM/YYYY'}}</small>
         </div>
         <p class="mb-1">{{post.description}}</p>
         <a *ngIf="autenticationService.isAuthenticated() && canEdit(post.userId)" [routerLink]="['/post-create', post.id]">Edit</a>
