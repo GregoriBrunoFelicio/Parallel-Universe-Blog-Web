@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { HttpResponse } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -123,19 +122,7 @@ describe('PostCreateComponent', () => {
         component.form.get('description').setValue('description');
         component.form.get('text').setValue('text');
         component.user = { id: 1 } as User;
-        postServiceMock.create.mockReturnValue(
-          throwError(
-            new HttpResponse({
-              body: {
-                error: {
-                  error: {
-                    message: '',
-                  },
-                },
-              },
-            })
-          )
-        );
+        postServiceMock.create.mockReturnValue(throwError(new Error()));
         component.handle();
       });
 
