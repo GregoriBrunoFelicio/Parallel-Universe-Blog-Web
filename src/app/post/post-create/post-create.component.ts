@@ -52,7 +52,6 @@ export class PostCreateComponent implements OnInit {
 
   setFormValues() {
     this.postService.getById(this.id).subscribe((post) => {
-      console.log(post);
       this.form.patchValue(post);
     });
   }
@@ -65,7 +64,7 @@ export class PostCreateComponent implements OnInit {
     const post = this.form.value as Post;
     post.date = post.date ? post.date : new Date();
     post.userId = this.user.id;
-    post.id = this.id ? this.id : null;
+    post.id = this.id ? this.id : 0;
     return post;
   }
 
@@ -73,6 +72,7 @@ export class PostCreateComponent implements OnInit {
     if (this.form.invalid) return;
     const post = this.createPostModel();
     if (!post.id) {
+      console.log(post);
       this.create(post);
     } else {
       this.update(post);
