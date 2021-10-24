@@ -72,7 +72,6 @@ export class PostCreateComponent implements OnInit {
     if (this.form.invalid) return;
     const post = this.createPostModel();
     if (!post.id) {
-      console.log(post);
       this.create(post);
     } else {
       this.update(post);
